@@ -5,7 +5,7 @@
 // Links de contato. Deixe "" (vazio) para esconder o botão.
 const CONTATOS = {
   email: "gustavovieira0519@gmail.com",
-  whatsapp: "5555992150198", // só números: 55 (Brasil) + DDD + número
+  whatsapp: "5562992150198", // só números: 55 (Brasil) + DDD + número
   instagram: "https://instagram.com/eaiivieira",
   github: "",     // ex.: "https://github.com/seu_usuario"
   linkedin: "",   // ex.: "https://linkedin.com/in/seu_usuario"
