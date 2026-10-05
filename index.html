@@ -10,7 +10,6 @@
   <meta property="og:title" content="Gustavo Vieira | Portfólio">
   <meta property="og:description" content="Conheça meus projetos e fale comigo.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://gustavovieira-afk.github.io/assets/foto.jpg">
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%237c5cff'/><text x='50' y='66' font-size='48' font-family='Arial' font-weight='700' fill='white' text-anchor='middle'>GV</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,27 +22,26 @@
   <!-- ===== BOAS-VINDAS ===== -->
   <header class="hero">
     <div class="container hero__inner">
-      <div class="hero__texto revelar">
-        <h1 class="bem-vindo">Bem-vindo!</h1>
+      <!-- data-digitar: texto que vai sendo digitado ao abrir o site
+           aparecer: surge depois que a digitação termina (efeitos no script.js) -->
+      <div class="hero__texto">
+        <h1 class="bem-vindo" data-digitar>Bem-vindo!</h1>
 
         <div class="quem">
-          <img src="assets/foto.jpg" alt="Foto de Gustavo" width="72" height="72">
-          <div>
-            <p class="quem__nome">Eu me chamo <strong>Gustavo Vieira</strong></p>
-            <p class="quem__cargo">Estudante de Ciência da Computação</p>
-          </div>
+          <p class="quem__nome"><span data-digitar>Eu me chamo </span><strong data-digitar>Gustavo Vieira</strong></p>
+          <p class="quem__cargo aparecer">Estudante de Ciência da Computação</p>
         </div>
 
-        <p class="hero__sobre">
+        <p class="hero__sobre aparecer">
           Transformo ideias e problemas do dia a dia em <strong>aplicativos e sistemas que
           funcionam de verdade</strong>. Converso com quem vai usar, testo na prática e
           melhoro a cada feedback.
         </p>
-        <p class="hero__sobre">
+        <p class="hero__sobre aparecer">
           Aqui embaixo estão os projetos em que trabalhei. Gostou de algum? Me chama direto pelo card.
         </p>
 
-        <a href="#projetos" class="btn btn--primario">Ver projetos ↓</a>
+        <a href="#projetos" class="btn btn--primario aparecer">Ver projetos ↓</a>
       </div>
 
       <div class="hero__ilustracao revelar">

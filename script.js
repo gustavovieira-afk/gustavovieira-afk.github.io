@@ -145,7 +145,40 @@ function efeitoRevelar() {
   document.querySelectorAll(".revelar").forEach((el) => observador.observe(el));
 }
 
+// Digita os textos marcados com data-digitar, um depois do outro, e no fim
+// mostra os elementos com a classe "aparecer".
+async function digitarTextos() {
+  const elementos = [...document.querySelectorAll("[data-digitar]")];
+  const aparecer = () =>
+    document.querySelectorAll(".aparecer").forEach((el, i) =>
+      setTimeout(() => el.classList.add("visivel"), i * 180));
+
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return aparecer();
+
+  const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+  const textos = elementos.map((el) => el.textContent);
+  elementos.forEach((el) => (el.textContent = ""));
+
+  const cursor = document.createElement("span");
+  cursor.className = "cursor-texto";
+  cursor.setAttribute("aria-hidden", "true");
+
+  await esperar(400);
+  for (let i = 0; i < elementos.length; i++) {
+    const texto = document.createTextNode("");
+    elementos[i].append(texto, cursor);
+    const velocidade = i === 0 ? 110 : 45; // o "Bem-vindo!" vai mais devagar
+    for (const letra of textos[i]) {
+      texto.data += letra;
+      await esperar(velocidade);
+    }
+    await esperar(i === 0 ? 350 : 0);
+  }
+  aparecer();
+}
+
 montarProjetos();
+digitarTextos();
 document.querySelector(".rodape__links").innerHTML = botoesContato(Object.keys(CONTATOS));
 efeitoRevelar();
 document.getElementById("ano").textContent = new Date().getFullYear();

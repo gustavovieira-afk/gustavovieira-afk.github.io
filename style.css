@@ -91,6 +91,7 @@ img { max-width: 100%; display: block; }
 .bem-vindo {
   font-size: clamp(3rem, 16vw, 6.5rem);
   white-space: nowrap;
+  min-height: 1em; /* guarda o espaço enquanto o texto é digitado */
   font-weight: 900;
   line-height: 1;
   letter-spacing: -3px;
@@ -101,21 +102,8 @@ img { max-width: 100%; display: block; }
   color: transparent;
 }
 
-.quem {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-.quem img {
-  width: 72px; height: 72px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: 35% 30%;
-  border: 3px solid var(--destaque);
-  box-shadow: 0 0 0 4px rgba(124, 92, 255, .2);
-}
-.quem__nome { font-size: 1.25rem; }
+.quem { margin-bottom: 24px; }
+.quem__nome { font-size: 1.4rem; min-height: 1.6em; }
 .quem__nome strong { font-weight: 700; }
 .quem__cargo { color: var(--texto-claro-suave); font-size: .95rem; }
 
@@ -127,6 +115,18 @@ img { max-width: 100%; display: block; }
 }
 .hero__sobre strong { color: var(--texto-claro); font-weight: 600; }
 .hero__texto .btn { margin-top: 18px; }
+
+/* cursor que acompanha o texto sendo digitado */
+.cursor-texto {
+  display: inline-block;
+  width: .08em;
+  min-width: 2px;
+  height: .9em;
+  margin-left: .06em;
+  vertical-align: -.08em;
+  background: var(--destaque-2);
+  animation: piscar 1s steps(1) infinite;
+}
 
 /* ===== Notebook animado ===== */
 .hero__ilustracao {
@@ -305,13 +305,13 @@ img { max-width: 100%; display: block; }
 .rodape__copy { color: var(--texto-claro-suave); font-size: .85rem; }
 
 /* ===== Animação de entrada ao rolar ===== */
-.revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-.revelar.visivel { opacity: 1; transform: none; }
+.revelar, .aparecer { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.revelar.visivel, .aparecer.visivel { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .revelar { opacity: 1; transform: none; transition: none; }
-  .notebook, .codigo .linha, .cursor, .vapor, .notificacao { animation: none; }
+  .revelar, .aparecer { opacity: 1; transform: none; transition: none; }
+  .notebook, .codigo .linha, .cursor, .vapor, .notificacao, .cursor-texto { animation: none; }
 }
 
 /* ===== Celular (a maioria das visitas do Instagram vem daqui) ===== */
