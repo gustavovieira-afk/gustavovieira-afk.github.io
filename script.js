@@ -126,7 +126,8 @@ function montarContatos() {
   const destinos = {
     email: { texto: "E-mail", url: (v) => `mailto:${v}` },
     whatsapp: {
-      texto: "WhatsApp",
+      // Mostra o número sem o 55 do país: 5555992150198 -> (55) 99215-0198
+      texto: CONTATOS.whatsapp.slice(2).replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3"),
       url: (v) => `https://wa.me/${v}?text=${encodeURIComponent("Olá Gustavo! Vi seu portfólio e gostaria de conversar.")}`,
     },
     instagram: { texto: "Instagram", url: (v) => v },
