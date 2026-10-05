@@ -23,7 +23,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif;
   background: var(--claro);
   color: var(--texto);
   line-height: 1.6;
@@ -32,6 +32,11 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
+
+/* fonte dos títulos */
+h1, h2, h3, .quem__nome, .btn {
+  font-family: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+}
 img { max-width: 100%; display: block; }
 
 .container {
@@ -92,9 +97,9 @@ img { max-width: 100%; display: block; }
   font-size: clamp(3rem, 16vw, 6.5rem);
   white-space: nowrap;
   min-height: 1em; /* guarda o espaço enquanto o texto é digitado */
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: -3px;
+  letter-spacing: -4px;
   margin-bottom: 32px;
   background: linear-gradient(90deg, #fff 20%, var(--destaque) 65%, var(--destaque-2));
   -webkit-background-clip: text;
