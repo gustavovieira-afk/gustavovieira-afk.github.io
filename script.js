@@ -26,7 +26,7 @@ const PROJETOS = [
     status: "real",
     emoji: "🎈",
     cor: ["#7c5cff", "#ec4899"],
-    imagem: "",
+    imagem: "assets/divertidamente.jpg",
     links: [],
   },
   {
