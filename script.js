@@ -50,7 +50,7 @@ const PROJETOS = [
     status: "pronto",
     emoji: "🌐",
     cor: ["#22c55e", "#14b8a6"],
-    imagem: "",
+    imagem: "assets/portfolio.jpg",
     links: [],
   },
 ];
