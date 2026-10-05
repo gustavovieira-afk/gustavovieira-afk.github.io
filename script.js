@@ -6,7 +6,7 @@
 const CONTATOS = {
   email: "gustavovieira0519@gmail.com",
   whatsapp: "5555992150198", // só números: 55 (Brasil) + DDD + número
-  instagram: "",  // ex.: "https://instagram.com/seu_usuario"
+  instagram: "https://instagram.com/eaiivieira",
   github: "",     // ex.: "https://github.com/seu_usuario"
   linkedin: "",   // ex.: "https://linkedin.com/in/seu_usuario"
 };
