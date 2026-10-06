@@ -30,18 +30,6 @@ const PROJETOS = [
     links: [],
   },
   {
-    titulo: "Sea Punk: Combate CLI",
-    descricao:
-      "Jogo de combate por turnos que roda no terminal. Projeto que estou usando para " +
-      "praticar lógica de programação e Python.",
-    tecnologias: ["Python", "Lógica de programação"],
-    status: "dev",
-    emoji: "⚔️",
-    cor: ["#0ea5e9", "#22d3ee"],
-    imagem: "",
-    links: [],
-  },
-  {
     titulo: "Este portfólio",
     descricao:
       "Site pessoal feito do zero, responsivo para celular, para reunir meus projetos e " +
