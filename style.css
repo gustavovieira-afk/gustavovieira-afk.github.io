@@ -294,6 +294,59 @@ img { max-width: 100%; display: block; }
 .icone-btn--whatsapp { background: var(--whatsapp); color: #fff; }
 .icone-btn--whatsapp:hover { background: #1ebe5b; }
 
+/* ===== Serviços ===== */
+.servicos { padding-top: 100px; }
+
+.grade-servicos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.servico {
+  background: var(--card);
+  border-radius: var(--raio);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 2px 4px rgba(20, 17, 43, .04), 0 12px 32px -12px rgba(20, 17, 43, .18);
+  transition: transform .3s, box-shadow .3s;
+}
+.servico:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 2px 4px rgba(20, 17, 43, .04), 0 24px 48px -16px rgba(124, 92, 255, .35);
+}
+.servico h3 { font-size: 1.3rem; letter-spacing: -.3px; }
+.servico > p { color: var(--texto-suave); }
+
+.servico__icone {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+}
+.servico__icone svg { width: 26px; height: 26px; }
+.servico__icone--sistema { background: linear-gradient(135deg, #7c5cff, #ec4899); }
+.servico__icone--site { background: linear-gradient(135deg, #0ea5e9, #22d3ee); }
+.servico__icone--planilha { background: linear-gradient(135deg, #22c55e, #14b8a6); }
+
+.servico__exemplos { list-style: none; display: grid; gap: 6px; flex: 1; }
+.servico__exemplos li { padding-left: 24px; position: relative; font-size: .95rem; }
+.servico__exemplos li::before {
+  content: "✓";
+  position: absolute; left: 0;
+  color: var(--destaque);
+  font-weight: 700;
+}
+
+.btn--whatsapp {
+  background: var(--whatsapp);
+  color: #fff;
+  margin-top: 6px;
+}
+.btn--whatsapp:hover { background: #1ebe5b; }
+
 /* ===== Rodapé ===== */
 .rodape {
   background: var(--escuro);

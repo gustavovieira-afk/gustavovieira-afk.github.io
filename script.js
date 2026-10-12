@@ -43,6 +43,29 @@ const PROJETOS = [
   },
 ];
 
+// Serviços da seção "O que posso fazer por você".
+//   icone: "sistema", "site" ou "planilha"
+const SERVICOS = [
+  {
+    titulo: "Sistemas para o seu negócio",
+    descricao: "Aplicativos sob medida para organizar a rotina da sua empresa, do jeito que você trabalha.",
+    exemplos: ["Controle de clientes", "Caixa e relatórios", "Estoque e agendamentos"],
+    icone: "sistema",
+  },
+  {
+    titulo: "Sites e páginas",
+    descricao: "Um site bonito e rápido para o seu comércio ou serviço aparecer na internet e receber clientes.",
+    exemplos: ["Site do seu negócio", "Página de divulgação", "Portfólio pessoal"],
+    icone: "site",
+  },
+  {
+    titulo: "Planilhas e automações",
+    descricao: "Planilhas organizadas que fazem as contas sozinhas e economizam horas de trabalho.",
+    exemplos: ["Controle financeiro", "Relatórios automáticos", "Organização de cadastros"],
+    icone: "planilha",
+  },
+];
+
 /* =====================================================================
    DAQUI PARA BAIXO É O FUNCIONAMENTO DO SITE
    ===================================================================== */
@@ -59,6 +82,12 @@ const ICONES = {
   instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
   github: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>',
   linkedin: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zm1.8 13.1H3.6V9h3.5v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/></svg>',
+};
+
+const ICONES_SERVICO = {
+  sistema: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 8h4M7 12h10"/></svg>',
+  site: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>',
+  planilha: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>',
 };
 
 const NOMES = { whatsapp: "WhatsApp", instagram: "Instagram", email: "E-mail", github: "GitHub", linkedin: "LinkedIn" };
@@ -86,6 +115,21 @@ function botoesContato(tipos, projeto) {
       <a class="icone-btn icone-btn--${tipo}" href="${linkContato(tipo, projeto)}"
          target="_blank" rel="noopener" aria-label="${NOMES[tipo]}" title="${NOMES[tipo]}">${ICONES[tipo]}</a>`)
     .join("");
+}
+
+function montarServicos() {
+  document.querySelector(".grade-servicos").innerHTML = SERVICOS.map((s) => {
+    const msg = `Olá Gustavo! Vi no seu portfólio o serviço "${s.titulo}" e gostaria de um orçamento.`;
+    return `
+      <article class="servico revelar">
+        <div class="servico__icone servico__icone--${s.icone}">${ICONES_SERVICO[s.icone]}</div>
+        <h3>${s.titulo}</h3>
+        <p>${s.descricao}</p>
+        <ul class="servico__exemplos">${s.exemplos.map((e) => `<li>${e}</li>`).join("")}</ul>
+        <a class="btn btn--whatsapp" href="https://wa.me/${CONTATOS.whatsapp}?text=${encodeURIComponent(msg)}"
+           target="_blank" rel="noopener">${ICONES.whatsapp} Pedir orçamento</a>
+      </article>`;
+  }).join("");
 }
 
 function montarProjetos() {
@@ -166,6 +210,7 @@ async function digitarTextos() {
 }
 
 montarProjetos();
+montarServicos();
 digitarTextos();
 document.querySelector(".rodape__links").innerHTML = botoesContato(Object.keys(CONTATOS));
 efeitoRevelar();
