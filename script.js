@@ -8,7 +8,7 @@ const CONTATOS = {
   instagram: "https://instagram.com/gvieira.tech",
   email: "gustavovieira0519@gmail.com",
   github: "",     // ex.: "https://github.com/seu_usuario"
-  linkedin: "",   // ex.: "https://linkedin.com/in/seu_usuario"
+  linkedin: "https://www.linkedin.com/in/gustavo-vieira-2531b43a9/",
 };
 
 // Projetos. Para adicionar um novo, copie um bloco { ... } e mude os campos.
