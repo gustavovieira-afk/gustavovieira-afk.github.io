@@ -146,15 +146,14 @@ img { max-width: 100%; display: block; }
 
 /* ===== Botão de tema (claro/escuro) ===== */
 .tema-btn {
-  position: fixed;
+  position: absolute; /* fica só no topo e rola junto com a página */
   top: 16px; right: 16px;
   z-index: 10;
   width: 44px; height: 44px;
   display: inline-flex; align-items: center; justify-content: center;
   background: none;
   border: 0;
-  color: #fff;
-  mix-blend-mode: difference; /* ícone fica claro no fundo escuro e escuro no fundo claro */
+  color: var(--texto-claro); /* o topo é sempre escuro, nos dois temas */
   opacity: .8;
   cursor: pointer;
   transition: opacity .2s, transform .3s;
