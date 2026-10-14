@@ -88,8 +88,15 @@ img { max-width: 100%; display: block; }
 }
 .btn--primario:hover { background: var(--destaque-hover); box-shadow: 0 12px 32px -8px rgba(var(--destaque-rgb), .9); }
 
-/* ===== Abertura (tela que se abre ao carregar o site) ===== */
-.abertura { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+/* ===== Abertura (tela que se abre ao carregar o site) =====
+   Linha do tempo: o terminal aparece (0s) e digita (0,45s a 1,35s), a linha
+   brilhante cruza a tela (1s a 1,6s) e as metades se abrem (1,7s a 2,4s). */
+.abertura {
+  position: fixed; inset: 0; z-index: 100; cursor: pointer;
+  /* garantia: mesmo sem JavaScript, a abertura some no fim e libera o site */
+  animation: esconder-abertura 0s 2.4s forwards;
+}
+@keyframes esconder-abertura { to { visibility: hidden; } }
 :root[data-abertura-vista] .abertura { display: none; }
 
 /* as duas metades da "cortina" saem uma para cima e outra para baixo */
@@ -98,7 +105,7 @@ img { max-width: 100%; display: block; }
   left: 0; right: 0;
   height: 50.5%;
   background: var(--escuro);
-  animation: .7s cubic-bezier(.7, 0, .2, 1) 1s both;
+  animation: .7s cubic-bezier(.7, 0, .2, 1) 1.7s both;
 }
 .abertura__metade--cima { top: 0; animation-name: abrir-cima; }
 .abertura__metade--baixo { bottom: 0; animation-name: abrir-baixo; }
@@ -113,36 +120,75 @@ img { max-width: 100%; display: block; }
   margin-top: -1px;
   background: linear-gradient(90deg, transparent, var(--destaque), var(--destaque-2), transparent);
   box-shadow: 0 0 16px rgba(var(--destaque-rgb), .8);
-  animation: linha-abertura 1.2s ease both;
+  animation: linha-abertura 1.7s ease both;
 }
 @keyframes linha-abertura {
-  0%, 40% { transform: scaleX(0); opacity: 1; }
-  75% { transform: scaleX(1); opacity: 1; }
+  0%, 59% { transform: scaleX(0); opacity: 1; }
+  94% { transform: scaleX(1); opacity: 1; }
   100% { transform: scaleX(1); opacity: 0; }
 }
 
-.abertura__logo {
+/* terminal: começa como ">_" e vai crescendo enquanto digita */
+.abertura__terminal {
   position: absolute;
   top: 50%; left: 50%;
-  width: 88px; height: 88px;
-  margin: -44px 0 0 -44px;
-  border-radius: 22px;
-  display: flex; align-items: center; justify-content: center;
+  height: 64px;
+  padding: 0 22px;
+  border-radius: 16px;
+  display: flex; align-items: center;
   background: var(--destaque);
   color: #fff;
   font-family: ui-monospace, Consolas, "Courier New", monospace;
   font-weight: 700;
-  font-size: 2.2rem;
+  font-size: 1.35rem;
+  white-space: nowrap;
   box-shadow: 0 0 48px rgba(var(--destaque-rgb), .55);
-  animation: logo-abertura 1.1s ease both;
+  animation: terminal-abertura 1.8s ease both;
 }
+@keyframes terminal-abertura {
+  0% { transform: translate(-50%, -50%) scale(.6); opacity: 0; }
+  20%, 89% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(.95); opacity: 0; }
+}
+/* o texto é revelado uma letra por vez (22 letras em "iniciando portfólio...") */
+.abertura__texto {
+  display: inline-block;
+  overflow: hidden;
+  width: 0;
+  animation: digitar-abertura .9s steps(22, end) .45s forwards;
+}
+@keyframes digitar-abertura { to { width: 22ch; } }
 /* o "_" pisca como o cursor de um terminal */
 .abertura__cursor { animation: piscar .5s steps(1) infinite; }
-@keyframes logo-abertura {
-  0% { transform: scale(.6); opacity: 0; }
-  30%, 80% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(.9); opacity: 0; }
+
+.abertura__dica {
+  position: absolute;
+  bottom: 32px; left: 0; right: 0;
+  text-align: center;
+  font-size: .8rem;
+  color: var(--texto-claro-suave);
+  animation: dica-abertura 1.7s ease both;
 }
+@keyframes dica-abertura {
+  0%, 25% { opacity: 0; }
+  40%, 85% { opacity: .7; }
+  100% { opacity: 0; }
+}
+
+/* celulares bem estreitos: terminal um pouco menor para caber na tela */
+@media (max-width: 400px) {
+  .abertura__terminal { height: 56px; padding: 0 18px; font-size: 1.1rem; }
+}
+
+/* ao tocar/clicar: some o terminal e a tela abre na hora */
+.abertura--pular { pointer-events: none; }
+.abertura--pular .abertura__terminal,
+.abertura--pular .abertura__linha,
+.abertura--pular .abertura__dica { animation: none; opacity: 0; transition: opacity .15s; }
+.abertura--pular .abertura__metade--cima { animation: pular-cima .45s cubic-bezier(.7, 0, .2, 1) both; }
+.abertura--pular .abertura__metade--baixo { animation: pular-baixo .45s cubic-bezier(.7, 0, .2, 1) both; }
+@keyframes pular-cima { to { transform: translateY(-100%); } }
+@keyframes pular-baixo { to { transform: translateY(100%); } }
 
 /* ===== Botão de tema (claro/escuro) ===== */
 .tema-btn {

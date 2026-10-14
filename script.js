@@ -215,8 +215,20 @@ function esperarAbertura() {
     if (!abertura || getComputedStyle(abertura).display === "none") return pronto();
     try { sessionStorage.setItem("abertura", "vista"); } catch (e) {}
     const fim = () => { abertura.remove(); pronto(); };
-    abertura.querySelector(".abertura__metade--baixo").addEventListener("animationend", fim, { once: true });
-    setTimeout(fim, 2500); // garantia caso o evento da animação não dispare
+    const metadeBaixo = abertura.querySelector(".abertura__metade--baixo");
+    metadeBaixo.addEventListener("animationend", fim);
+    setTimeout(fim, 3000); // garantia caso o evento da animação não dispare
+
+    // tocar, clicar ou apertar uma tecla abre a tela na hora
+    // (só antes de ela começar a abrir sozinha, aos 1,7s)
+    const inicio = performance.now();
+    const pular = () => {
+      if (performance.now() - inicio > 1600) return;
+      abertura.classList.add("abertura--pular");
+      setTimeout(fim, 500); // a tela leva 0,45s para abrir
+    };
+    abertura.addEventListener("click", pular);
+    document.addEventListener("keydown", pular, { once: true });
   });
 }
 
