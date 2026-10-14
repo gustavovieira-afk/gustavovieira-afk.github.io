@@ -40,7 +40,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; } /* no celular, impede a página de ficar mais larga que a tela */
 
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -131,7 +131,10 @@ img { max-width: 100%; display: block; }
 /* terminal: começa como ">_" e vai crescendo enquanto digita */
 .abertura__terminal {
   position: absolute;
-  top: 50%; left: 50%;
+  inset: 0;
+  margin: auto; /* centraliza na tela (funciona melhor no celular que left: 50% + translate) */
+  width: fit-content;
+  max-width: calc(100% - 32px);
   height: 64px;
   padding: 0 22px;
   border-radius: 16px;
@@ -146,9 +149,9 @@ img { max-width: 100%; display: block; }
   animation: terminal-abertura 1.8s ease both;
 }
 @keyframes terminal-abertura {
-  0% { transform: translate(-50%, -50%) scale(.6); opacity: 0; }
-  20%, 89% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(.95); opacity: 0; }
+  0% { transform: scale(.6); opacity: 0; }
+  20%, 89% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(.95); opacity: 0; }
 }
 /* o texto é revelado uma letra por vez (22 letras em "iniciando portfólio...") */
 .abertura__texto {
