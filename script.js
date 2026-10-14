@@ -47,20 +47,20 @@ const PROJETOS = [
 //   icone: "sistema", "site" ou "planilha" (usa a ilustração assets/servico-<icone>.svg)
 const SERVICOS = [
   {
-    titulo: "Sistemas para o seu negócio",
-    descricao: "Aplicativos sob medida para organizar a rotina da sua empresa, do jeito que você trabalha.",
+    titulo: "Sistemas & Ferramentas Internas",
+    descricao: "Aplicações web sob medida para organizar a rotina da sua empresa, centralizar dados e eliminar processos manuais no formato exato da sua operação.",
     exemplos: ["Controle de clientes", "Caixa e relatórios", "Estoque e agendamentos"],
     icone: "sistema",
   },
   {
-    titulo: "Sites e páginas",
-    descricao: "Um site bonito e rápido para o seu comércio ou serviço aparecer na internet e receber clientes.",
+    titulo: "Sites & Landing Pages de Alta Conversão",
+    descricao: "Páginas rápidas, modernas e otimizadas para posicionar sua marca no Google, transmitir credibilidade e transformar visitantes em contatos diretos no WhatsApp.",
     exemplos: ["Site do seu negócio", "Página de divulgação", "Portfólio pessoal"],
     icone: "site",
   },
   {
-    titulo: "Planilhas e automações",
-    descricao: "Planilhas organizadas que fazem as contas sozinhas e economizam horas de trabalho.",
+    titulo: "Automação de Processos & Dashboards",
+    descricao: "Planilhas inteligentes e painéis automatizados que cruzam informações sozinhos, eliminam erros de digitação e poupam horas operacionais da sua equipe.",
     exemplos: ["Controle financeiro", "Relatórios automáticos", "Organização de cadastros"],
     icone: "planilha",
   },
@@ -207,9 +207,31 @@ async function digitarTextos() {
   aparecer();
 }
 
+// Espera a animação de abertura terminar e tira ela da página.
+// Se a abertura não aparecer (já vista na sessão ou movimento reduzido), segue direto.
+function esperarAbertura() {
+  const abertura = document.querySelector(".abertura");
+  return new Promise((pronto) => {
+    if (!abertura || getComputedStyle(abertura).display === "none") return pronto();
+    try { sessionStorage.setItem("abertura", "vista"); } catch (e) {}
+    const fim = () => { abertura.remove(); pronto(); };
+    abertura.querySelector(".abertura__metade--baixo").addEventListener("animationend", fim, { once: true });
+    setTimeout(fim, 2500); // garantia caso o evento da animação não dispare
+  });
+}
+
+// Troca entre o tema escuro (padrão) e o claro, e lembra a escolha no navegador
+function alternarTema() {
+  const raiz = document.documentElement;
+  const tema = raiz.dataset.theme === "light" ? "dark" : "light";
+  raiz.dataset.theme = tema;
+  try { localStorage.setItem("tema", tema); } catch (e) {}
+}
+
 montarProjetos();
 montarServicos();
-digitarTextos();
+esperarAbertura().then(digitarTextos);
 document.querySelector(".rodape__links").innerHTML = botoesContato(Object.keys(CONTATOS));
 efeitoRevelar();
 document.getElementById("ano").textContent = new Date().getFullYear();
+document.querySelector(".tema-btn").addEventListener("click", alternarTema);
